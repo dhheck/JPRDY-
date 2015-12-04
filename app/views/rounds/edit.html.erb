@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @round.errors.any? %>
+  <% @round.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Round #<%= @round.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_round/<%= @round.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for game_id -->
+      <div class="form-group">
+        <label for="game_id" class="control-label">
+          Game
+        </label>
+
+        <input type="text" id="game_id" name="game_id" placeholder="Game" class="form-control" value="<%= @round.game_id %>">
+      </div>
+
+      <!-- Label and input for category -->
+      <div class="form-group">
+        <label for="category" class="control-label">
+          Category
+        </label>
+
+        <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="<%= @round.category %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Round
+      </button>
+      or
+      <a href="/rounds/<%= @round.id %>">Cancel</a>
+    </form>
+  </div>
+</div>

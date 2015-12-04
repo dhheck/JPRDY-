@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h3>Round #<%= @round.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Game</dt>
+      <dd><%= @round.game_id %></dd>
+
+      <dt>Category</dt>
+      <dd><%= @round.category %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/rounds" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/rounds/<%= @round.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_round/<%= @round.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

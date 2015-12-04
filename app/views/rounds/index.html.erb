@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>
+    Rounds
+    <a href="/rounds/new" class="btn btn-lg btn-success">New Round</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Game</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @rounds.each do |round| %>
+      <tr>
+        <td><%= round.game_id %></td>
+        <td><%= round.category %></td>
+        <td>
+          <a href="/rounds/<%= round.id %>" class="btn btn-primary">Show</a>
+          <a href="/rounds/<%= round.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_round/<%= round.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

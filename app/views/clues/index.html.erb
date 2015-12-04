@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h1>
+    Clues
+    <a href="/clues/new" class="btn btn-lg btn-success">New Clue</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Category</th>
+        <th>Unrevealed</th>
+        <th>Value</th>
+        <th>Right</th>
+        <th>Wrong</th>
+        <th>No resp</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @clues.each do |clue| %>
+      <tr>
+        <td><%= clue.category_id %></td>
+        <td><%= clue.unrevealed %></td>
+        <td><%= clue.value %></td>
+        <td><%= clue.right %></td>
+        <td><%= clue.wrong %></td>
+        <td><%= clue.no_resp %></td>
+        <td>
+          <a href="/clues/<%= clue.id %>" class="btn btn-primary">Show</a>
+          <a href="/clues/<%= clue.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_clue/<%= clue.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

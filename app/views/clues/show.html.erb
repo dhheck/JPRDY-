@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h3>Clue #<%= @clue.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Category</dt>
+      <dd><%= @clue.category_id %></dd>
+
+      <dt>Unrevealed</dt>
+      <dd><%= @clue.unrevealed %></dd>
+
+      <dt>Value</dt>
+      <dd><%= @clue.value %></dd>
+
+      <dt>Right</dt>
+      <dd><%= @clue.right %></dd>
+
+      <dt>Wrong</dt>
+      <dd><%= @clue.wrong %></dd>
+
+      <dt>No resp</dt>
+      <dd><%= @clue.no_resp %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/clues" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/clues/<%= @clue.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_clue/<%= @clue.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

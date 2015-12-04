@@ -1,0 +1,78 @@
+<!-- Validation failure messages -->
+<% if @clue.errors.any? %>
+  <% @clue.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Clue</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_clue" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for category_id -->
+      <div class="form-group">
+        <label for="category_id" class="control-label">
+          Category
+        </label>
+
+        <input type="text" id="category_id" name="category_id" placeholder="Category" class="form-control" value="<%= @clue.category_id %>">
+      </div>
+
+      <!-- Label and input for unrevealed -->
+      <div class="checkbox">
+        <label for="unrevealed">
+          <input type="checkbox" id="unrevealed" name="unrevealed" value="1" <%= "checked" if @clue.unrevealed %>>
+          Unrevealed
+        </label>
+      </div>
+
+      <!-- Label and input for value -->
+      <div class="form-group">
+        <label for="value" class="control-label">
+          Value
+        </label>
+
+        <input type="text" id="value" name="value" placeholder="Value" class="form-control" value="<%= @clue.value %>">
+      </div>
+
+      <!-- Label and input for right -->
+      <div class="checkbox">
+        <label for="right">
+          <input type="checkbox" id="right" name="right" value="1" <%= "checked" if @clue.right %>>
+          Right
+        </label>
+      </div>
+
+      <!-- Label and input for wrong -->
+      <div class="checkbox">
+        <label for="wrong">
+          <input type="checkbox" id="wrong" name="wrong" value="1" <%= "checked" if @clue.wrong %>>
+          Wrong
+        </label>
+      </div>
+
+      <!-- Label and input for no_resp -->
+      <div class="checkbox">
+        <label for="no_resp">
+          <input type="checkbox" id="no_resp" name="no_resp" value="1" <%= "checked" if @clue.no_resp %>>
+          No resp
+        </label>
+      </div>
+
+      <button class="btn btn-success">
+        Create Clue
+      </button>
+      or
+      <a href="/clues">Cancel</a>
+    </form>
+  </div>
+</div>
