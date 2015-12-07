@@ -31,8 +31,8 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
 
-    # @category.clue = params[:clue]
-    # @category.theme = params[:theme]
+    @category.clue = params[:clue]
+    @category.theme = params[:theme]
     # @category.round_id = params[:round_id]
 
     if @category.save

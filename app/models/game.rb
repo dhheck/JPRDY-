@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
   has_many :rounds, :class_name => "Round", :foreign_key => "game_id", :dependent => :destroy
   has_many :categories, :through => :rounds
   has_many :clues, :through => :categories
-
+  validates :date, :uniqueness => true, :presence => true
 
   after_create :add_rounds
 

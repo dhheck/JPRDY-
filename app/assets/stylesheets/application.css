@@ -17,3 +17,7 @@
 .panel {
   border: thin grey solid;
 }
+
+h4 {
+  text-align: center
+}
