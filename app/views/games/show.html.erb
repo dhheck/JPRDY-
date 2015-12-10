@@ -15,10 +15,10 @@
     <% round.categories.each do |category| %>
     <div class="col-md-2">
       <h4>
-        <form>
+        <form action="/update_category/<%= category.id %>">
           <% if category.name.blank? %>
           <div class="form-group">
-            <input type="name" class="form-control" id="Catname" placeholder="Category Name?">
+            <input type="name" class="form-control" id="Catname" name="name" placeholder="Category Name?">
           </div>
           <% else %>
           <div class="form-group">
@@ -37,15 +37,15 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a id="name-<%= category.id %>" href="/update_category/<%= category.id %>?theme=Arts%20%26%20Culture">Arts & Culture</a></li>
-              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Entertainment">Entertainment</a></li>
-              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Geography">Geography</a></li>
-              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=History">History</a></li>
-              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Literature">Literature</a></li>
-              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Science">Science</a></li>
-              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Sports">Sports</a></li>
-              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Word%20Games">Word Games</a></li>
-              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Miscellaneous">Miscellaneous</a></li>
+              <li><a id="name-<%= category.id %>" href="/update_category/<%= category.id %>?theme=Arts%20%26%20Culture&name=<%= category.name %>">Arts & Culture</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Entertainment&name=<%= category.name %>">Entertainment</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Geography&name=<%= category.name %>">Geography</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=History&name=<%= category.name %>">History</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Literature&name=<%= category.name %>">Literature</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Science&name=<%= category.name %>">Science</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Sports&name=<%= category.name %>">Sports</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Word%20Games&name=<%= category.name %>">Word Games</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Miscellaneous&name=<%= category.name %>">Miscellaneous</a></li>
             </ul>
           </div>
 
@@ -56,15 +56,15 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a id="update-<%= category.id %>" href="/update_category/<%= category.id %>?theme=Arts%20%26%20Culture">Arts & Culture</a></li>
-              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Entertainment">Entertainment</a></li>
-              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Geography">Geography</a></li>
-              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=History">History</a></li>
-              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Literature">Literature</a></li>
-              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Science">Science</a></li>
-              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Sports">Sports</a></li>
-              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Word%20Games">Word Games</a></li>
-              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Miscellaneous">Miscellaneous</a></li>
+              <li><a id="update-<%= category.id %>" href="/update_category/<%= category.id %>?theme=Arts%20%26%20Culture&name=<%= category.name %>">Arts & Culture</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Entertainment&name=<%= category.name %>">Entertainment</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Geography&name=<%= category.name %>">Geography</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=History&name=<%= category.name %>">History</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Literature&name=<%= category.name %>">Literature</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Science&name=<%= category.name %>">Science</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Sports&name=<%= category.name %>">Sports</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Word%20Games&name=<%= category.name %>">Word Games</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Miscellaneous&name=<%= category.name %>">Miscellaneous</a></li>
             </ul>
           </div>
           <% end %>
