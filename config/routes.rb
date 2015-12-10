@@ -67,6 +67,10 @@ Rails.application.routes.draw do
   get "/delete_clue/:id", :controller => "clues", :action => "destroy"
   #------------------------------
 
+  #Routes for analytics
+  get "/analytics", :controller => "analytics", :action => "show"
+  get "/analytics/update_daterange", :controller => "analytics", :action => "update"
+
   root 'games#new'
 
   devise_for :users

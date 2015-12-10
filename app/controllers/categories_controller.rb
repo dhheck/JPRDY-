@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new
-    @category.clue = params[:clue]
+    @category.name = params[:name]
     @category.theme = params[:theme]
     @category.round_id = params[:round_id]
 
@@ -31,14 +31,17 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
 
-    @category.clue = params[:clue]
+    @category.name = params[:name]
     @category.theme = params[:theme]
     # @category.round_id = params[:round_id]
 
-    if @category.save
-      redirect_to :back, :notice => "Category updated successfully."
-    else
-      render 'edit'
+    respond_to do |format|
+      if @category.save
+        format.html {redirect_to :back, :notice => "Category updated successfully."}
+        format.js {render 'update.js.erb'}
+      else
+        format.html {render 'edit'}
+      end
     end
   end
 

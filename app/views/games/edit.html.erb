@@ -1,11 +1,11 @@
 <!-- Validation failure messages -->
 <% if @game.errors.any? %>
-  <% @game.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @game.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <div class="page-header">
@@ -24,7 +24,7 @@
           Game type
         </label>
 
-        <textarea id="game_type" name="game_type" placeholder="Game type" class="form-control" rows="3"><%= @game.game_type %></textarea>
+        <%= select_tag(:game_type, options_for_select([['Normal', 1], ['Celebrity', 2], ['College Championship', 3], ['Teachers\' Tournament', 4], ['Teen Tournament', 5], ['Tournament of Champions', 6]]), :class => "form-control") %>
       </div>
 
       <!-- Label and input for date -->

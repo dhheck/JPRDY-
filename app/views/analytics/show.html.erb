@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="col-md-3">
+    <form action="/analytics/update_daterange">
+      <div class="form-group">
+        <label for="date" class="control-label">
+          Start Date
+        </label>
+
+        <div class='input-group date' id='datetimepicker1'>
+          <input type='text' class="form-control" name="startdate" id="date" placeholder="<%= Game.first.date %>" >
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="date" class="control-label">
+          End Date
+        </label>
+
+        <div class='input-group date' id='datetimepicker2'>
+          <input type='text' class="form-control" name="enddate" id="date" placeholder="<%= Time.now.year %>-<%= Time.now.month %>-<%= Time.now.day %>">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default">Update Dates for Analysis</button>
+    </form>
+  </div>
+
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="game_type" class="control-label">
+        Category to Analyze
+      </label>
+
+      <%= select_tag(:category, options_from_collection_for_select(Category.all, :theme, :theme ), :class => "form-control")  %>
+    </div>
+    </div>
+
+    <div class="col-md-5">
+      Stats
+      <%= Game.total_score %>
+      <%= Clue.includes(:category).where(categories: {theme: 'Entertainment'}).map(&:value).sum %>
+      <%= Game.where('date >= ? AND date <= ?', @startdate, @enddate).map(&:clues).flatten.select{|clue| clue.category.theme == 'History'}.map(&:value).sum %>
+    </div>
+  </div>
+
+
+  <% games_by_date = Game.all.group_by {|game| game.date.to_date} %>
+  <% h = {} %>
+  <% games_by_date.each {|key, value| h[key.to_s] = value.map(&:score).sum} %>
+  <%= h %>
+  <%= line_chart h %>
+
+  <script type="text/javascript">
+    $(function () {
+      $('#datetimepicker1').datetimepicker();
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(function () {
+      $('#datetimepicker2').datetimepicker();
+    });
+  </script>

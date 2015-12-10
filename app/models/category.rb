@@ -6,6 +6,8 @@ class Category < ActiveRecord::Base
 
   after_create :add_clues
 
+  # validates :theme, :presence => true
+
     def add_clues
     if self.round.category == "Final Jeopardy"
       clue = Clue.new

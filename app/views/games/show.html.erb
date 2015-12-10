@@ -1,133 +1,142 @@
 <% @game.rounds.each do |round| %>
 <div class="container">
   <div class="row">
-  <div class="col-md-4">
-    <h3><%= @game.date %> (<%= @game.game_type %>)</h3>
-  </div>
-  <div class="col-md-6">
-    <h3><%= round.category %>! Round</h3>
-  </div>
-  <div class="col-md-2">
-    <h3>Total: <%= number_to_currency(@game.score, :precision => 0) %></h3>
-  </div>
+    <div class="col-md-4">
+      <h3><%= @game.date %> (<%= @game.game_type %>)</h3>
+    </div>
+    <div class="col-md-4">
+      <h3><%= round.category %>! Round</h3>
+    </div>
+    <div class="col-md-4">
+      <h3 id="total-<%= round.id %>">Total: <%= number_to_currency(@game.score, :precision => 0) %> <%= @game.num_right %> <i class="fa fa-check"></i>, <%= @game.num_wrong %> <i class="fa fa-times"></i></h3>
+    </div>
   </div>
   <div class="row">
     <% round.categories.each do |category| %>
     <div class="col-md-2">
-      <h4><%= category.name %>
-        <div class="form-group">
-          <input type="name" class="form-control" id="Catname" placeholder="Category Name?">
-        </div></h4>
-
-        <h4>
+      <h4>
+        <form>
+          <% if category.name.blank? %>
           <div class="form-group">
-            <% if category.theme.blank? %>
-            <div class="dropdown">
-              <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Category Theme
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="/update_category/<%= category.id %>?theme=Arts%20%26%20Culture">Arts & Culture</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Entertainment">Entertainment</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Geography">Geography</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=History">History</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Literature">Literature</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Science">Science</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Sports">Sports</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Word%20Games">Word Games</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Miscellaneous">Miscellaneous</a></li>
-              </ul>
-            </div>
+            <input type="name" class="form-control" id="Catname" placeholder="Category Name?">
+          </div>
+          <% else %>
+          <div class="form-group">
+            <input type="name" class="form-control" id="Catname" value="<%= category.name %>">
+          </div>
+          <% end %>
+        </form>
+      </h4>
 
-            <% else %>
-            <div class="dropdown">
-              <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <%= category.theme %>
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="/update_category/<%= category.id %>?theme=Arts%20%26%20Culture">Arts & Culture</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Entertainment">Entertainment</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Geography">Geography</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=History">History</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Literature">Literature</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Science">Science</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Sports">Sports</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Word%20Games">Word Games</a></li>
-                <li><a href="/update_category/<%= category.id %>?theme=Miscellaneous">Miscellaneous</a></li>
-              </ul>
-            </div>
-            <% end %>
-          </h4>
+      <h4>
+        <div class="form-group">
+          <% if category.theme.blank? %>
+          <div class="dropdown">
+            <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Category Theme
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a id="name-<%= category.id %>" href="/update_category/<%= category.id %>?theme=Arts%20%26%20Culture">Arts & Culture</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Entertainment">Entertainment</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Geography">Geography</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=History">History</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Literature">Literature</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Science">Science</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Sports">Sports</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Word%20Games">Word Games</a></li>
+              <li><a id="name-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Miscellaneous">Miscellaneous</a></li>
+            </ul>
+          </div>
 
-          <% category.clues.each do |clue| %>
-          <div class="panel">
-            <div class="panel-body">
-
-              <p><%= number_to_currency(clue.value, :precision => 0) %></p>
-
-              <div class="btn-group btn-group-justified">
-                <% if clue.right == true %>
-                <a class="btn btn-success btn-sm" href="/update_clue/<%= clue.id %>?right=true&wrong=false&no_resp=false">
-                  <i class="fa fa-check"></i>
-                </a>
-
-                <a class="btn btn-default btn-sm"  href="/update_clue/<%= clue.id %>?right=false&wrong=false&no_resp=true">
-                  --
-                </a>
-
-                <a class="btn btn-default btn-sm"  href="/update_clue/<%= clue.id %>?right=false&wrong=true&no_resp=false">
-                  <i class="fa fa-times"></i>
-                </a>
-
-                <% elsif clue.no_resp == true %>
-                <a class="btn btn-default btn-sm"  href="/update_clue/<%= clue.id %>?right=true&wrong=false&no_resp=false">
-                  <i class="fa fa-check"></i>
-                </a>
-
-                <a class="btn btn-warning btn-sm" href="/update_clue/<%= clue.id %>?right=false&wrong=false&no_resp=true">
-                  --
-                </a>
-
-                <a class="btn btn-default btn-sm"  href="/update_clue/<%= clue.id %>?right=false&wrong=true&no_resp=false">
-                  <i class="fa fa-times"></i>
-                </a>
-
-                <% elsif clue.wrong == true %>
-                <a class="btn btn-default btn-sm"  href="/update_clue/<%= clue.id %>?right=true&wrong=false&no_resp=false">
-                  <i class="fa fa-check"></i>
-                </a>
-
-                <a class="btn btn-default btn-sm"  href="/update_clue/<%= clue.id %>?right=false&wrong=false&no_resp=true">
-                  --
-                </a>
-
-                <a class="btn btn-danger btn-sm"  href="/update_clue/<%= clue.id %>?right=false&wrong=true&no_resp=false">
-                  <i class="fa fa-times"></i>
-                </a>
-
-                <% else %>
-                <a class="btn btn-default btn-sm"  href="/update_clue/<%= clue.id %>?right=true&wrong=false&no_resp=false">
-                  <i class="fa fa-check"></i>
-                </a>
-
-                <a class="btn btn-default btn-sm"  href="/update_clue/<%= clue.id %>?right=false&wrong=false&no_resp=true">
-                  --
-                </a>
-
-                <a class="btn btn-default btn-sm"  href="/update_clue/<%= clue.id %>?right=false&wrong=true&no_resp=false">
-                  <i class="fa fa-times"></i>
-                </a>
-
-                <% end %>
-
-              </div>
-            </div>
+          <% else %>
+          <div class="dropdown">
+            <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <%= category.theme %>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a id="update-<%= category.id %>" href="/update_category/<%= category.id %>?theme=Arts%20%26%20Culture">Arts & Culture</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Entertainment">Entertainment</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Geography">Geography</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=History">History</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Literature">Literature</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Science">Science</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Sports">Sports</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Word%20Games">Word Games</a></li>
+              <li><a id="update-<%= category.id %>"href="/update_category/<%= category.id %>?theme=Miscellaneous">Miscellaneous</a></li>
+            </ul>
           </div>
           <% end %>
         </div>
-        <% end %>
+      </h4>
+
+      <% category.clues.each do |clue| %>
+
+      <div class="panel">
+        <div class="panel-body">
+
+          <p><%= number_to_currency(clue.value, :precision => 0) %></p>
+
+          <div class="btn-group btn-group-justified">
+            <% if clue.right == true %>
+            <a id="correct-<%= clue.id %>" class="btn btn-success btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=true&wrong=false&no_resp=false">
+              <i class="fa fa-check"></i>
+            </a>
+
+            <a id="no_resp-<%= clue.id %>" class="btn btn-default btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=false&wrong=false&no_resp=true">
+              --
+            </a>
+
+            <a id="incorrect-<%= clue.id %>" class="btn btn-default btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=false&wrong=true&no_resp=false">
+              <i class="fa fa-times"></i>
+            </a>
+
+            <% elsif clue.no_resp == true %>
+            <a id="correct-<%= clue.id %>" class="btn btn-default btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=true&wrong=false&no_resp=false">
+              <i class="fa fa-check"></i>
+            </a>
+
+            <a id="no_resp-<%= clue.id %>" class="btn btn-warning btn-sm"data-remote="true" href="/update_clue/<%= clue.id %>?right=false&wrong=false&no_resp=true">
+              --
+            </a>
+
+            <a id="incorrect-<%= clue.id %>" class="btn btn-default btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=false&wrong=true&no_resp=false">
+              <i class="fa fa-times"></i>
+            </a>
+
+            <% elsif clue.wrong == true %>
+            <a id="correct-<%= clue.id %>" class="btn btn-default btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=true&wrong=false&no_resp=false">
+              <i class="fa fa-check"></i>
+            </a>
+
+            <a id="no_resp-<%= clue.id %>" class="btn btn-default btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=false&wrong=false&no_resp=true">
+              --
+            </a>
+
+            <a id="incorrect-<%= clue.id %>" class="btn btn-danger btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=false&wrong=true&no_resp=false">
+              <i class="fa fa-times"></i>
+            </a>
+
+            <% else %>
+            <a id="correct-<%= clue.id %>" class="btn btn-default btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=true&wrong=false&no_resp=false">
+              <i class="fa fa-check"></i>
+            </a>
+
+            <a id="no_resp-<%= clue.id %>" class="btn btn-default btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=false&wrong=false&no_resp=true">
+              --
+            </a>
+
+            <a id="incorrect-<%= clue.id %>" class="btn btn-default btn-sm" data-remote="true" href="/update_clue/<%= clue.id %>?right=false&wrong=true&no_resp=false">
+              <i class="fa fa-times"></i>
+            </a>
+          <% end %>
+        </div>
       </div>
     </div>
     <% end %>
+  </div>
+  <% end %>
+</div>
+</div>
+<% end %>

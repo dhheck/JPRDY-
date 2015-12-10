@@ -4,6 +4,7 @@ class Game < ActiveRecord::Base
   has_many :categories, :through => :rounds
   has_many :clues, :through => :categories
   validates :date, :uniqueness => true, :presence => true
+  validates :game_type, :presence => true
 
   after_create :add_rounds
 
@@ -18,10 +19,22 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def num_right
+    num_right = self.clues.where(:right => true).count
+  end
+
+  def num_wrong
+    num_wrong = self.clues.where(:wrong => true).count
+  end
+
   def score
     value_right = self.clues.where(:right => true).sum(:value)
     value_wrong = self.clues.where(:wrong => true).sum(:value)
 
     return value_right - value_wrong
+  end
+
+  def self.total_score
+    self.all.map(&:score).sum
   end
 end

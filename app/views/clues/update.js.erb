@@ -1,0 +1,24 @@
+<% if @clue.right == true %>
+$("#incorrect-<%= @clue.id %>").removeClass("btn-danger");
+$("#no_resp-<%= @clue.id %>").removeClass("btn-warning");
+$("#incorrect-<%= @clue.id %>").addClass("btn-default");
+$("#no_resp-<%= @clue.id %>").addClass("btn-default");
+$("#correct-<%= @clue.id %>").addClass("btn-success");
+
+<% elsif @clue.no_resp == true %>
+$("#correct-<%= @clue.id %>").removeClass("btn-success");
+$("#incorrect-<%= @clue.id %>").removeClass("btn-danger");
+$("#correct-<%= @clue.id %>").addClass("btn-default");
+$("#incorrect-<%= @clue.id %>").addClass("btn-default");
+$("#no_resp-<%= @clue.id %>").addClass("btn-warning");
+
+<% elsif @clue.wrong == true %>
+$("#correct-<%= @clue.id %>").removeClass("btn-success");
+$("#no_resp-<%= @clue.id %>").removeClass("btn-warning");
+$("#correct-<%= @clue.id %>").addClass("btn-default");
+$("#no_resp-<%= @clue.id %>").addClass("btn-default");
+$("#incorrect-<%= @clue.id %>").addClass("btn-danger");
+
+<% end %>
+
+$("#total-<%= @clue.category.round.id %>").text("Total: <%= number_to_currency(@clue.category.round.game.score, :precision => 0) %>")

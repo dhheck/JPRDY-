@@ -15,7 +15,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new
     @game.game_type = params[:game_type]
-    @game.date = params[:date]
+    @game.date = Chronic.parse(params[:date])
 
     if @game.save
       redirect_to "/games", :notice => "Game created successfully."

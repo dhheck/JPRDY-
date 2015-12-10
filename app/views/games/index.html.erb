@@ -18,7 +18,7 @@
       <% @games.each do |game| %>
       <tr>
         <td><%= game.game_type %></td>
-        <td><%= game.date %></td>
+        <td><%= game.date.strftime('%m/%d/%y') %></td>
         <td><%= game.score %></td>
         <td>
           <a href="/games/<%= game.id %>" class="btn btn-primary">Show</a>

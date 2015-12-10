@@ -41,10 +41,13 @@ class CluesController < ApplicationController
     @clue.wrong = params[:wrong]
     @clue.no_resp = params[:no_resp]
 
-    if @clue.save
-      redirect_to :back, :notice => "Clue updated successfully."
-    else
-      render 'edit'
+    respond_to do |format|
+      if @clue.save
+        format.html {redirect_to :back, :notice => "Clue updated successfully."}
+        format.js {render 'update.js.erb'}
+      else
+        format.html {render 'edit'}
+      end
     end
   end
 
