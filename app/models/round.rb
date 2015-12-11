@@ -20,4 +20,9 @@ class Round < ActiveRecord::Base
     end
   end
 
+  def final_sum
+
+
+  end
+
 end

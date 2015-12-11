@@ -50,20 +50,25 @@
             <li class="list-group-item">
               Average Score: <%= number_to_currency(Game.average_score, :precision => 0) %>
             </li>
+            <li class="list-group-item">
+              All-time: <%= Game.total_right %>  <i class="fa fa-check"></i>,  <%= Game.total_wrong %>  <i class="fa fa-times"></i>, <%= Game.total_noresp %> --
+            </li>
+            <li class="list-group-item">
+              Average Game: <%= Game.average_numright %>  <i class="fa fa-check"></i>,  <%= Game.average_numwrong %>  <i class="fa fa-times"></i>, <%= Game.average_numnoresp %> --
+            </li>
           </ul>
           </div>
-      <%= Clue.includes(:category).where(categories: {theme: 'Entertainment'}).map(&:value).sum %>
-      <%= Game.where('date >= ? AND date <= ?', @startdate, @enddate).map(&:clues).flatten.select{|clue| clue.category.theme == 'History'}.map(&:value).sum %>
-      </div>
+<!--       <%= Clue.includes(:category).where(categories: {theme: "Geography"}).map(&:value).sum %>
+ -->      </div>
     </div>
   </div>
 
 
-  <% games_by_date = Game.all.group_by {|game| game.date.to_date} %>
+<!--   <% games_by_date = Game.all.group_by {|game| game.date.to_date} %>
   <% h = {} %>
   <% games_by_date.each {|key, value| h[key.to_s] = value.map(&:score).sum} %>
   <%= h %>
-  <%= line_chart h %>
+  <%= line_chart h %> -->
 
   <script type="text/javascript">
     $(function () {

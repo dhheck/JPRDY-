@@ -27,6 +27,10 @@ class Game < ActiveRecord::Base
     num_wrong = self.clues.where(:wrong => true).count
   end
 
+  def num_noresp
+    num_noresp = self.clues.where(:no_resp => true).count
+  end
+
   def score
     value_right = self.clues.where(:right => true).sum(:value)
     value_wrong = self.clues.where(:wrong => true).sum(:value)
@@ -41,4 +45,29 @@ class Game < ActiveRecord::Base
   def self.average_score
     (self.all.map(&:score).sum)/(self.all.count)
   end
+
+  def self.total_right
+    self.all.map(&:num_right).sum
+  end
+
+  def self.total_wrong
+    self.all.map(&:num_wrong).sum
+  end
+
+  def self.total_noresp
+    self.all.map(&:num_noresp).sum
+  end
+
+  def self.average_numright
+    (self.all.map(&:num_right).sum)/(self.all.count)
+  end
+
+  def self.average_numwrong
+    (self.all.map(&:num_wrong).sum)/(self.all.count)
+  end
+
+  def self.average_numnoresp
+    (self.all.map(&:num_noresp).sum)/(self.all.count)
+  end
+
 end
