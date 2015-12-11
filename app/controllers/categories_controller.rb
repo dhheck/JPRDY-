@@ -38,7 +38,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.save
         format.html {redirect_to :back, :notice => "Category updated successfully."}
-        format.js {render 'update.js.erb'}
+        format.js {render 'update_categories.js.erb'}
       else
         format.html {render 'edit'}
       end

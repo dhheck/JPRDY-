@@ -44,7 +44,7 @@ class CluesController < ApplicationController
     respond_to do |format|
       if @clue.save
         format.html {redirect_to :back, :notice => "Clue updated successfully."}
-        format.js {render 'update.js.erb'}
+        format.js {render 'update_clues.js.erb'}
       else
         format.html {render 'edit'}
       end

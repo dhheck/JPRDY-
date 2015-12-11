@@ -9,8 +9,9 @@ def show
 end
 
 def update
-  startdate = params[:startdate]
-  enddate   = params[:enddate]
+  @startdate = params[:startdate]
+  @enddate   = params[:enddate]
+  @theme     = params[:theme]
 
   redirect_to :back
 end

@@ -11,7 +11,7 @@
       <tr>
         <th>Game type</th>
         <th>Date</th>
-        <th>Score</th>
+        <th>Winnings</th>
         <th>Actions</th>
       </tr>
 
@@ -19,7 +19,7 @@
       <tr>
         <td><%= game.game_type %></td>
         <td><%= game.date.strftime('%m/%d/%y') %></td>
-        <td><%= game.score %></td>
+        <td><%= number_to_currency(game.score, :precision => 0) %></td>
         <td>
           <a href="/games/<%= game.id %>" class="btn btn-primary">Show</a>
           <a href="/games/<%= game.id %>/edit" class="btn btn-warning">Edit</a>

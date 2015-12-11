@@ -1,0 +1,18 @@
+<% if @category.name == "Arts & Culture" %>
+$("name-<%= category.id %>").addClass("Arts & Culture");
+
+<% elsif @clue.no_resp == true %>
+$("#correct-<%= @clue.id %>").removeClass("btn-success");
+$("#incorrect-<%= @clue.id %>").removeClass("btn-danger");
+$("#correct-<%= @clue.id %>").addClass("btn-default");
+$("#incorrect-<%= @clue.id %>").addClass("btn-default");
+$("#no_resp-<%= @clue.id %>").addClass("btn-warning");
+
+<% elsif @clue.wrong == true %>
+$("#correct-<%= @clue.id %>").removeClass("btn-success");
+$("#no_resp-<%= @clue.id %>").removeClass("btn-warning");
+$("#correct-<%= @clue.id %>").addClass("btn-default");
+$("#no_resp-<%= @clue.id %>").addClass("btn-default");
+$("#incorrect-<%= @clue.id %>").addClass("btn-danger");
+
+<% end %>

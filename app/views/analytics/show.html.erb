@@ -7,7 +7,7 @@
         </label>
 
         <div class='input-group date' id='datetimepicker1'>
-          <input type='text' class="form-control" name="startdate" id="date" placeholder="<%= Game.first.date %>" >
+          <input type='text' class="form-control" name="startdate" id="date" value="<%= Game.first.date %>" >
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -20,7 +20,7 @@
         </label>
 
         <div class='input-group date' id='datetimepicker2'>
-          <input type='text' class="form-control" name="enddate" id="date" placeholder="<%= Time.now.year %>-<%= Time.now.month %>-<%= Time.now.day %>">
+          <input type='text' class="form-control" name="enddate" id="date" value="<%= Time.now.year %>-<%= Time.now.month %>-<%= Time.now.day %>">
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -41,10 +41,20 @@
     </div>
 
     <div class="col-md-5">
-      Stats
-      <%= Game.total_score %>
+      <div class="panel panel-default">
+        <div class="panel-heading" text><b>Summary Statistics</b></div>
+          <ul class="list-group">
+            <li class="list-group-item">
+              All-time total: <%= number_to_currency(Game.total_score, :precision => 0) %>
+            </li>
+            <li class="list-group-item">
+              Average Score: <%= number_to_currency(Game.average_score, :precision => 0) %>
+            </li>
+          </ul>
+          </div>
       <%= Clue.includes(:category).where(categories: {theme: 'Entertainment'}).map(&:value).sum %>
       <%= Game.where('date >= ? AND date <= ?', @startdate, @enddate).map(&:clues).flatten.select{|clue| clue.category.theme == 'History'}.map(&:value).sum %>
+      </div>
     </div>
   </div>
 

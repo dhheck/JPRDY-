@@ -37,4 +37,8 @@ class Game < ActiveRecord::Base
   def self.total_score
     self.all.map(&:score).sum
   end
+
+  def self.average_score
+    (self.all.map(&:score).sum)/(self.all.count)
+  end
 end
